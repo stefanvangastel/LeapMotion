@@ -1,9 +1,34 @@
+//Leap detection!
+var controller = new Leap.Controller();
+
+controller.on('connect', function() {
+  $('.leap').fadeIn();
+});
+
+controller.on('deviceConnected', function() {
+ $('.leap').fadeIn();
+});
+
+controller.on('deviceDisconnected', function() {
+  $('.leap').fadeOut();
+});
+
+controller.connect();
+
+
 
 // detect swipes with the leap motion device
 Leap.loop({enableGestures: true}, function(frame) {
 
 
-  //Check status:
+  //Check hand status:
+  if (frame.hands.length > 0 && $('.hand').is(":hidden")) {
+    $('.hand').fadeIn();
+  }else if(frame.hands.length <= 0 && $('.hand').is(":visible")){
+    $('.hand').fadeOut();
+  }
+
+  //Check Leap status:
   if (frame.hands.length > 0 && $('.hand').is(":hidden")) {
     $('.hand').fadeIn();
   }else if(frame.hands.length <= 0 && $('.hand').is(":visible")){
@@ -24,7 +49,7 @@ Leap.loop({enableGestures: true}, function(frame) {
         }));
 
 
-
+        //On swipe
         if (swipes.length > 0 && swipes[0].state === "stop") {
           //console.log(swipes[0].direction[0]);
           //slide(swipes[0].direction[0]);
@@ -37,13 +62,12 @@ Leap.loop({enableGestures: true}, function(frame) {
           
         }
 
-
-
+        //On screen or key tap
         if (click.length > 0 && click[0].state === "stop") {
           $('div.show h2').effect("bounce", { distance: 80 });
         }
 
-        
+  
 
   }
 

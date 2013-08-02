@@ -27,6 +27,14 @@ body {
 	display:none;
 }
 
+.leap{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+	display:none;
+}
+
 .share {
 	position: absolute;
 	bottom: 20px;
@@ -81,6 +89,10 @@ body {
 .layer.three {
 	background: #64b9d2 no-repeat center url('../img/mindtrick.png');
 
+}
+
+.layer.four {
+	background: #ffad43;
 }
 
 .bullets {
